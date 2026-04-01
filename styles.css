@@ -412,6 +412,102 @@ h1 {
   min-height: 1.2em;
 }
 
+/* Available books links */
+.available-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+  justify-items: center;
+}
+
+.store-card {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.store-card:hover {
+  transform: scale(1.05);
+}
+
+.book-cover-small {
+  width: 90px;
+  height: 160px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.store-logo-overlay {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease;
+}
+
+.store-logo-overlay:hover {
+  transform: scale(1.1);
+}
+
+.store-logo-overlay img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.available-links {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  padding: 16px;
+  border-radius: 18px;
+}
+.available-links h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+.available-links p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.store-logos {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.store-logos a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  text-decoration: none;
+}
+.store-logos a img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.store-logos a span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
 /* Trailers grid */
 .trailers-grid {
   display: grid;
