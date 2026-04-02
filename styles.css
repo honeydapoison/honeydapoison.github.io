@@ -412,6 +412,171 @@ h1 {
   min-height: 1.2em;
 }
 
+/* Available books links */
+.available-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+  justify-items: center;
+}
+
+.store-card {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.amazon-card, .kobo-card {
+  background: linear-gradient(135deg, #fefefe 0%, #f5f5f5 50%, #e8e8e8 100%);
+  position: relative;
+}
+
+.amazon-card::before, .kobo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.02) 2px,
+    rgba(0,0,0,0.02) 4px
+  );
+  pointer-events: none;
+}
+
+.apple-card, .google-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  position: relative;
+}
+
+.apple-card::before, .google-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.store-card:hover {
+  transform: scale(1.05);
+}
+
+.book-cover-small {
+  width: 100px;
+  height: 160px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.book-cover-small-print {
+  width: 120px;
+  height: 160px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.store-logo-overlay {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease;
+  z-index: 2;
+}
+
+.store-logo-overlay:hover {
+  transform: scale(1.1);
+}
+
+.store-logo-overlay img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.coming-soon-mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  color: #fdfeff;
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  z-index: 3;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.available-links {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  padding: 16px;
+  border-radius: 18px;
+}
+.available-links h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+.available-links p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.store-logos {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.store-logos a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  text-decoration: none;
+}
+.store-logos a img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.store-logos a span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
 /* Trailers grid */
 .trailers-grid {
   display: grid;

@@ -42,7 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
     joinModal.classList.remove('open');
     joinModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+
+    // Remove auto-open query/hash so reload doesn't reopen the modal.
+    if (window.location.hash === '#join') {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('openJoin') === '1') {
+      params.delete('openJoin');
+      const newSearch = params.toString();
+      history.replaceState(null, '', window.location.pathname + (newSearch ? `?${newSearch}` : ''));
+    }
   }
+
+  function openJoinFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('openJoin') === '1' || window.location.hash === '#join') {
+      openJoinModal();
+    }
+  }
+
+  openJoinFromUrl();
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#join') openJoinModal();
+  });
 
   function handleJoinFormLoad() {
     joinFormLoadCount += 1;
@@ -96,6 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
     contactModal.classList.remove('open');
     contactModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+
+    // Remove auto-open query/hash so reloading doesn't reopen the modal.
+    if (window.location.hash === '#contact') {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('openContact') === '1') {
+      params.delete('openContact');
+      const newSearch = params.toString();
+      history.replaceState(null, '', window.location.pathname + (newSearch ? `?${newSearch}` : ''));
+    }
   }
 
   function handleContactFormLoad() {
@@ -119,6 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   contactForm?.addEventListener('load', handleContactFormLoad);
+
+  function openContactFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('openContact') === '1' || window.location.hash === '#contact') {
+      openContactModal();
+    }
+  }
+
+  openContactFromUrl();
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#contact') openContactModal();
+  });
 
   // Video trailer modal
   const trailerCards = document.querySelectorAll('.trailer-card');
