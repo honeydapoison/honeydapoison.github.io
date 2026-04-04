@@ -175,8 +175,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoClose = videoModal?.querySelector('.video-modal-close');
   const videoIframe = document.getElementById('video-iframe');
 
-  function openVideoModal(videoId) {
+  function getYouTubeVideoId(input) {
+    if (!input) return '';
+
+    const raw = input.trim();
+
+    // Already a plain YouTube ID
+    if (/^[a-zA-Z0-9_-]{11}$/.test(raw)) return raw;
+
+    try {
+      const url = new URL(raw);
+
+      // youtu.be/<id>
+      if (url.hostname.includes('youtu.be')) {
+        return url.pathname.replace('/', '').split('/')[0] || '';
+      }
+
+      // youtube.com/watch?v=<id>
+      const watchId = url.searchParams.get('v');
+      if (watchId) return watchId;
+
+      // youtube.com/shorts/<id> or /embed/<id>
+      const parts = url.pathname.split('/').filter(Boolean);
+      const markerIndex = parts.findIndex((part) => part === 'shorts' || part === 'embed');
+      if (markerIndex >= 0 && parts[markerIndex + 1]) return parts[markerIndex + 1];
+    } catch (_) {
+      return '';
+    }
+
+    return '';
+  }
+
+  function openVideoModal(videoSource) {
     if (!videoModal || !videoIframe) return;
+
+    const videoId = getYouTubeVideoId(videoSource);
+    if (!videoId) return;
 
     const origin = encodeURIComponent(window.location.origin);
     const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${origin}`;
@@ -202,8 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   trailerCards.forEach((card) => {
     card.addEventListener('click', () => {
-      const videoId = card.getAttribute('data-video');
-      if (videoId) openVideoModal(videoId);
+      const videoSource = card.getAttribute('data-video');
+      if (videoSource) openVideoModal(videoSource);
     });
   });
 
