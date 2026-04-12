@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Join modal (Google Form)
-  const joinButton = document.querySelector('.btn-join');
+  const joinButtons = document.querySelectorAll('.btn-join');
+  const joinButton = joinButtons[0];
   const joinModal = document.getElementById('join-modal');
   const joinModalClose = joinModal?.querySelector('.modal-close');
   const joinModalBackdrop = joinModal?.querySelector('[data-modal-close]');
@@ -77,10 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (joinStatus) joinStatus.textContent = 'Thanks! You can close this window now.';
   }
 
-  joinButton?.addEventListener('click', (event) => {
+  joinButtons.forEach(btn => btn.addEventListener('click', (event) => {
     event.preventDefault();
     openJoinModal();
-  });
+  }));
 
   joinModalClose?.addEventListener('click', closeJoinModal);
   joinModalBackdrop?.addEventListener('click', closeJoinModal);
@@ -92,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
   joinForm?.addEventListener('load', handleJoinFormLoad);
 
   // Contact modal (Google Form)
-  const contactButton = document.querySelector('.btn-contact');
+  const contactButtons = document.querySelectorAll('.btn-contact');
+  const contactButton = contactButtons[0];
   const contactModal = document.getElementById('contact-modal');
   const contactModalClose = contactModal?.querySelector('.modal-close');
   const contactModalBackdrop = contactModal?.querySelector('[data-modal-close]');
@@ -141,10 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactStatus) contactStatus.textContent = 'Thanks! You can close this window now.';
   }
 
-  contactButton?.addEventListener('click', (event) => {
+  contactButtons.forEach(btn => btn.addEventListener('click', (event) => {
     event.preventDefault();
     openContactModal();
-  });
+  }));
 
   contactModalClose?.addEventListener('click', closeContactModal);
   contactModalBackdrop?.addEventListener('click', closeContactModal);
